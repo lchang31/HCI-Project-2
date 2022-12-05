@@ -49,9 +49,8 @@
   </script>
 </div>
 
-<!-- Create a div where the graph will take place -->
+<!-- Gender graph -->
 <div id="my_dataviz"></div>
-
 <script src="gender.js"></script>
 
 <div id="HCC_Graph">
@@ -59,15 +58,17 @@
 </div>
 
 <div id="black_whiteClusters">
+  <center>
+    <h1>K Means Clustering Results</h1>
+  </center>
   <center><iframe src="./black_white_cluster.html" height="500" width="700"></iframe></center>
 </div>
 
 <div id="Clustering">
-  <center><iframe src="./Cluster.html" height="500" width="700"></iframe></center>
+  <center><iframe src="./Cluster.html" height="600" width="770"></iframe></center>
 </div>
 
 <div id="kMeansSummary">
-
   <p>In order to further understand what makes certain nursing homes different from other, we decided to utilize a
     K-means clustering algorithm in order to identify features that might make one nursing home better or worse than
     another. There were 33 features used in this analysis the most important ones being:</p>
@@ -98,7 +99,7 @@
     Cluster B has an average HCC score on the higher side, 2.41. It also has the second highest total SNF charges,
     distinct beneficiaries, and total SNF medicare payments, with average values of $7.78M, 328, and $4.72M. This
     group supports significantly more Medicare patients than cluster A despite only containing 693 nursing homes, 76%
-    less than group A. This group also contains slightly larger group of Black beneficiaries (around 35k with a mean
+    less than group A. This group also contains a slightly larger group of Black beneficiaries (around 35k with a mean
     of 51/home) and slightly fewer White beneficiaries (174k, mean 250/home) than Group A with a 139k difference
     between
     the two races.
@@ -120,11 +121,11 @@
 </div>
 
 <div id="whiteclustering">
-  <center><iframe src="./whiteCluster.html" height="400" width="800"></iframe></center>
+  <center><iframe src="./whiteCluster.html" height="600" width="770"></iframe></center>
 </div>
 
 <div id="blackclustering">
-  <center><iframe src="./blackCluster.html" height="400" width="800"></iframe></center>
+  <center><iframe src="./blackCluster.html" height="600" width="770"></iframe></center>
 </div>
 
 </html>
