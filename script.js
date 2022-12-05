@@ -1,5 +1,3 @@
-
-
 var data = [{ label: "American Indian/Alaska Native", value: 0.2 }, { label: "Hispanic", value: 3.6 },
 { label: "Asian/Pacific Islander", value: 1 }, { label: "Black", value: 9.84 },
 { label: "White", value: 85.38 }, { label: "Other", value: 0.05 }]

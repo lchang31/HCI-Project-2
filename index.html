@@ -29,9 +29,9 @@
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
 <!--Pie graph Script-->
-<center>
-  <div id="Pie_Graph"></div>
-</center>
+<div id="Pie_Graph">
+  <p>insert text</p>
+</div>
 <script src=script.js></script>
 
 <div style="float:left; clear: both">
@@ -52,100 +52,7 @@
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
 
-<script>
-
-  // create 2 data_set
-
-  var margin = { top: 30, right: 30, bottom: 70, left: 60 },
-    width = 1060 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
-
-  // append the svg object to the body of the page
-  var svg = d3.select("#my_dataviz")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform",
-      "translate(" + margin.left + "," + margin.top + ")");
-
-  // Initialize the X axis
-  var x = d3.scaleBand()
-    .range([0, width])
-    .padding(0.2);
-  var xAxis = svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-
-  // Initialize the Y axis
-  var y = d3.scaleLinear()
-    .range([height, 0]);
-  var yAxis = svg.append("g")
-    .attr("class", "myYaxis")
-
-  var urls = ["https://raw.githubusercontent.com/lchang31/HCI-Project-2/main/ben_sex.csv"];
-  var filename = urls[0];
-
-  var dataGender;
-  d3.csv(filename)
-    .row(function (d) { return { state: d.state, male_ben: +d.male_ben, female_ben: +d.female_ben }; })
-    .get(function (error, rows) {
-      console.log(rows);
-      dataGender = rows;// Now you can assign it
-      updateBar("male_ben")// Now you can draw it
-    });
-
-  function updateBar(gender) {
-
-    // Update the X axis
-    x.domain(dataGender.map(function (d) { return d.state; }))
-    xAxis.call(d3.axisBottom(x))
-
-    // Update the Y axis
-    if (gender == "male_ben") {
-      y.domain([0, d3.max(dataGender, function (d) { return d.male_ben })]);
-      yAxis.transition().duration(1000).call(d3.axisLeft(y));
-    } else if (gender == "female_ben") {
-      y.domain([0, d3.max(dataGender, function (d) { return d.female_ben })]);
-      yAxis.transition().duration(1000).call(d3.axisLeft(y));
-    }
-
-    // Create the u variable
-    var u = svg.selectAll("rect")
-      .data(dataGender)
-
-    if (gender == "male_ben") {
-      u
-        .enter()
-        .append("rect") // Add a new rect for each new elements
-        .merge(u) // get the already existing elements as well
-        .transition() // and apply changes to all of them
-        .duration(1000)
-        .attr("x", function (d) { return x(d.state); })
-        .attr("width", x.bandwidth())
-        .attr("fill", "#69b3a2")
-        .attr("y", function (d) { return y(d.male_ben); })
-        .attr("height", function (d) { return height - y(d.male_ben); })
-    } else {
-      u
-        .enter()
-        .append("rect") // Add a new rect for each new elements
-        .merge(u) // get the already existing elements as well
-        .transition() // and apply changes to all of them
-        .duration(1000)
-        .attr("x", function (d) { return x(d.state); })
-        .attr("width", x.bandwidth())
-        .attr("fill", "#69b3a2")
-        .attr("y", function (d) { return y(d.female_ben); })
-        .attr("height", function (d) { return height - y(d.female_ben); })
-    }
-
-    // If less group in the new dataset, I delete the ones not in use anymore
-    u
-      .exit()
-      .remove()
-  }
-
-</script>
+<script src="gender.js"></script>
 
 <div id="HCC_Graph">
   <center><iframe src="./HCC.html" height="500" width="700"></iframe></center>
@@ -157,6 +64,59 @@
 
 <div id="Clustering">
   <center><iframe src="./Cluster.html" height="500" width="700"></iframe></center>
+</div>
+
+<div id="kMeansSummary">
+
+  <p>In order to further understand what makes certain nursing homes different from other, we decided to utilize a
+    K-means clustering algorithm in order to identify features that might make one nursing home better or worse than
+    another. There were 33 features used in this analysis the most important ones being:</p>
+  <p>&#x2022; Provider_id</p>
+  <p>&#x2022; Facility_name</p>
+  <p>&#x2022; City</p>
+  <p>&#x2022; State</p>
+  <p>&#x2022; Distinct_beneficiaries_per_provider</p>
+  <p>&#x2022; Total_snf_medicare_standard_payment_amount</p>
+  <p>&#x2022; White_beneficiaries</p>
+  <p>&#x2022; Black_beneficiaries</p>
+  <p>&#x2022; Average_hcc_score</p>
+  <p>
+    The k-means algorithm identified 4 clusters. Cluster A has 2840 nursing homes, Cluster B has 693 homes, Cluster C
+    has 1688 homes, and Cluster D has 147 homes. Looking a little closer at the features in the clusters, Group A has
+    the lowest HCC scores with a mean of 2.25 indicating the healthiest population. The total SNF charges are also the
+    lowest, with an average of $1.54 million. The average medicare parents and beneficiaries are also the lowest with
+    average values of $962k and 79 respectively. This analysis tells us that the “best” nursing facilities, indicated
+    by the HCC score, are the ones that take the fewest Medicare patients. We also see the second largest difference
+    in
+    White and Black beneficiaries, with 158k more White beneficiaries than Black. In fact, looking closer at the
+    distribution of the bar plots, we see the mean of the curve around 65 beneficiares/nursing home for White
+    beneficiaries while the curve for Black beneficiaries has a mean of 10 but doesn’t have enough data to produce a
+    cohesive plot.
+  </p>
+
+  <p>
+    Cluster B has an average HCC score on the higher side, 2.41. It also has the second highest total SNF charges,
+    distinct beneficiaries, and total SNF medicare payments, with average values of $7.78M, 328, and $4.72M. This
+    group supports significantly more Medicare patients than cluster A despite only containing 693 nursing homes, 76%
+    less than group A. This group also contains slightly larger group of Black beneficiaries (around 35k with a mean
+    of 51/home) and slightly fewer White beneficiaries (174k, mean 250/home) than Group A with a 139k difference
+    between
+    the two races.
+  </p>
+
+  <p>
+    Cluster C has the highest HCC score (2.45), but for total SNF charges ($3.9M), distinct beneficiaries (179), and
+    total SNF medicare payments ($2.4M), it lands somewhere between group A and B. This cluster has the second largest
+    number of nursing homes (1688) but the largest number of beneficiaries (283k). It also supports the largest total
+    number of Black beneficiaries (51k) but the distribution has a heavy left skew with a mean of 30.
+  </p>
+
+  <p>
+    Cluster D is the smallest group with only 147 nursing homes. It has the second lowest HCC score of 2.34, and the
+    largest total SNF charges ($16.1M), distinct beneficiaries (580), and total SNF medicare payments ($9.1M). Despite
+    having the fewest number of homes, this group handles over 56% of the total Medicare payments. It also has the
+    highest means of White and Black beneficiaries per home, 435 and 84 respectively.
+  </p>
 </div>
 
 <div id="whiteclustering">
