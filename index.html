@@ -23,6 +23,7 @@
 <body>
   <center>
     <h1>Analyzing Health Insurance Inequalities</h1>
+    <p style="font-size:small"> Niharika Desaraju, Austin Yu, Karry Alamieyeseigha, Lucy Chang </p>
   </center>
 </body>
 
@@ -30,10 +31,73 @@
 <script src="https://d3js.org/d3.v4.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
+
+<!-- Introduciton -->
+<p>After the recent pandemic and in recent years, there has been a greater focus on medical wellness across the United
+  States. Thus, there are many different institutions to help people in need and most are growing over time. Of the many
+  different types of care provided, a few forms are Home Health Agencies, Nursing Homes, Hospice Care, and General Care.
+</p>
+<p>
+  To address the different types of care, we must clarify what each one is. By definition, a home health agency (HHA) is
+  a service provider that provides aid to the patient where the patient is currently living instead of the patient
+  coming to the provider for aid. A nursing home is a place that people are sent to when they do not necessarily need a
+  hospital, but can not be properly cared for at their home. Hospice care is a service that provides aid for people with
+  terminal health conditions where they can get the proper care they need to have as easy a time as possible. Lastly,
+  general care is aid provided where the beneficiary travels to a medical site to receive aid in some form.
+</p>
+<p>
+  The dataset that we looked at contained a large amount of data detailing racial and gender backgrounds for different
+  locations of nursing homes, hospice centers, and home health agencies. It also provides data for the amount of money
+  the providers charged individuals in addition to the amount of money that medicare covered for the people that
+  required medical aid. The data set information is largely gathered from the years 2011-2015, so we can examine if
+  there is any bias between race or gender for the amount of money beneficiaries are paying or the amount that medicare
+  is covering.
+</p>
+<p>
+
+  Some notable terms that need to be defined in order to understand the data set are HCC scores, what beneficiaries are,
+  and what SNF charges are. HCC scores are the output of a scoring system which measures how healthy an individual is
+  with scores less than 1 being healthy and scores higher than 1 being in some degree of risk. Beneficiaries are people
+  who receive that aid from someone else and are, in this scenario, the patients receiving medical aid. Lastly, SNF
+  charges are defined as Skilled Nursing Facility charges and are charges billed to the beneficiaries for treatment
+  received. In addition, patients who qualify for Medicare, a federal health insurance, have their bills partially or
+  fully covered by the government. Medicaid, on the other hand, is an assistance program to help cover low income
+  patients’ medical expenses.
+</p>
+<p>
+  Considering this background, this data now becomes relevant in a social justice environment as we can analyze whether
+  patients with Medicare or Medicaid coverage get billed more or less depending on race, gender, and location. People
+  with low income or who are qualified for Medicare might be targeted more compared to normal patients for higher costs
+  and Medicare, in response to constant usage of their service for a given person, might cover less of the expenses in
+  return. Not every person using government provided aid is receiving the same amount of aid, and we want to look at if
+  these trends show through our data analysis.
+</p>
 <!--Pie graph Script-->
-<div id="Pie_Graph">
-  <p>insert text</p>
+<center>
+  <h1>Preliminary Analysis</h1>
+</center>
+<div id="Pie_Graph" style="float: left">
 </div>
+<center>
+  <h2>Race</h2>
+</center>
+<p>
+  A look at the distribution of race shows that white beneficiaries in the US account for about 85.38% of all
+  beneficiaries across states in the US. Whereas in comparison, black beneficiaries come in second with only 9.84% of
+  beneficiaries. Hispanic beneficiaries come in third with 3.66% and then Asian Pacific Islander beneficiaries,
+  American Indian or Alaska Native beneficiaries and lastly other unknown beneficiaries with 1.0%, 0.2% and 0.05%
+  respectively.
+</p> <br /><br /><br /><br /><br /><br />
+<center>
+  <h2>Gender</h2>
+</center>
+<p>
+  By taking a look at the number of male and female beneficiaries for different states, we see that in all states,
+  there exist more female beneficiaries than male beneficiaries. This is probably due to the fact that there is an
+  upper bound or fixed quota to the number of male and female beneficiaries per state. In some states, such as
+  Florida, it differs by as much as 30,000 people but on average by only about 10,000 people.
+</p>
+
 <script src=script.js></script>
 
 <div style="float:left; clear: both">
@@ -55,6 +119,16 @@
 <div id="my_dataviz"></div>
 <script src="gender.js"></script>
 
+<center>
+  <h2>HCC Scores</h2>
+</center>
+<p>
+  According to the CMS, a higher HCC score indicates a higher risk of chronic diseases while a lower HCC score
+  indicates a healthier population. We see that the state with the highest average HCC score is California and by
+  comparison, the state with the lowest happens to be Puerto Rico with 1.3. There is also a wide difference between the
+  maximum and minimum HCC score. In California for example, the maximum HCC Score is 9.15 and the minimum is 1.11.
+  Similarly in Ohio, the maximum HCC score is 7.07 and the minimum score is 0.85.
+</p>
 <div id="HCC_Graph">
   <center><iframe src="./HCC.html" height="500" width="700" frameborder="0"></iframe></center>
 </div>
@@ -130,5 +204,46 @@
 <div id="blackclustering">
   <center><iframe src="./blackCluster.html" height="600" width="770" frameborder="0"></iframe></center>
 </div>
+
+<center>
+  <h1>Conclusion</h1>
+</center>
+<p>
+  For our preliminary analysis we were able to look at race and gender distributions of medicare beneficiaries. We
+  found that there were the most white beneficiaries and overall a larger number of female beneficiaries across all the
+  states. We also looked at HCC scores and found that California had the highest HCC score and Puerto Rico had the
+  lowest HCC risk score.
+</p>
+<p>
+
+  After performing our k-means clustering, we found that the better” nursing homes (Cluster A), homes with a lower HCC
+  score, tend to support fewer Medicare patients and in that difference also support fewer Black beneficiaries (average
+  of 10/home). This group also supported the lowest number of White beneficiaries per nursing home (average of 65 per
+  home) possibly indicating that a a larger number of self-funded patients provides more money to support the well-being
+  of patients at these centers. The groups with the lowest HCC scores (Clusters B, C) supported a large number of
+  Medicare beneficiaries per home, 51 Black, 251 White and 30 Black, 137 White respectively. Surprisingly, the group
+  with the largest number of beneficiaries, which also made up over 65% of all medicare payments, had the second highest
+  HCC score and was able to support on average 84 Black beneficiaries and 435 White beneficiaries per nursing home
+  (Cluster D). This group was also the smallest of the clusters, with only 147 homes. While there is some correlation
+  between a lower HCC score and the number of Medicare patients as well as with the number of Black beneficiaries, this
+  final group indicates that the relationship is slightly more nuanced. A closer look at some of the facilities in
+  cluster D indicated that it contains medium - extra large facilities, providing a rationale as to how they are able to
+  support a larger number of beneficiaries.
+</p>
+<p>
+  Future work might consider incorporating the sizes of facilities into the analysis, data that we, unfortunately, were
+  not provided. We would also like to perform further analysis on the income distributions of the beneficiaries and
+  explore if there is a difference in how much charge medicare may cover.
+</p>
+<h1>References</h1>
+<p>
+  <a href="https://www.kaggle.com/datasets/cms/cms-medicare">Dataset Link</a>
+</p>
+<p>
+  <a href="https://github.com/lchang31/HCI-Project-2">Github Link</a>
+</p>
+<p>
+  <a href="https://www.kaggle.com/lchang31/hci-version-3">Kaggle Notebook Link</a>
+</p>
 
 </html>
